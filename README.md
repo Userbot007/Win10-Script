@@ -16,34 +16,32 @@ This is a PowerShell script for automation of routine tasks done after fresh ins
 &nbsp;
 
 ## Usage
-If you just want to run the script with the default preset, download and unpack the [latest release](https://github.com/Disassembler0/Win10-Initial-Setup-Script/releases) and then simply double-click on the *Default.cmd* file and confirm *User Account Control* prompt. Make sure your account is a member of *Administrators* group as the script attempts to run with elevated privileges.
-
-The script supports command line options and parameters which can help you customize the tweak selection or even add your own custom tweaks, however these features require some basic knowledge of command line usage and PowerShell scripting. Refer to [Advanced usage](#advanced-usage) section for more details.
+Run the script ``Win10.ps1`` with administrator privilidges (make sure your account has administrator permissions otherwise the script won't be able to function properly.
 
 &nbsp;
 
 ## FAQ
 
 **Q:** Can I run the script safely?  
-**A:** Definitely not. You have to understand what the functions do and what will be the implications for you if you run them. Some functions lower security, hide controls or uninstall applications. **If you're not sure what the script does, do not attempt to run it!**
+**A:** No, you have to understand what the functions do and what will be the implications for you if you run them. Some functions lower security, hide controls and uninstall applications. **If you're not sure what the script does, do not attempt to run it!**
 
 **Q:** Can I run the script repeatedly?  
-**A:** Yes! In fact the script has been written to support exactly that, as it's not uncommon that big Windows Updates reset some of the settings.
+**A:** Yes! In fact the script has been written to support exactly that, as it's not uncommon that big Windows Updates reset some of the settings and tend to add back bloatware.
 
 **Q:** Which versions and editions of Windows are supported?  
-**A:** The script aims to be fully compatible with the most up-to-date 64bit version of Windows 10 receiving updates from semi-annual channel, however if you create your own preset and exclude the incompatible tweaks, it will work also on LTSB/LTSC and possibly also on 32bit systems. Vast majority of the tweaks will work on all Windows editions. Some of them rely on group policy settings, so there may be a few limitations for Home and Education editions.
+**A:** The script aims to be fully compatible with the most up-to-date 64-bit version of Windows 10 receiving updates from semi-annual channel, however if you create your own preset and exclude the incompatible tweaks, it will work also on LTSB/LTSC and possibly also on 32-bit systems. Vast majority of the tweaks will work on all Windows editions. Some of them rely on group policy settings, so there may be a few limitations for Home and Education editions.
 
 **Q:** Can I run the script on Windows Server 2016 or 2019?  
-**A:** Yes. Starting from version 2.5, Windows Server is supported. There are even few tweaks specific to Server environment. Keep in mind though, that the script is still primarily designed for Windows 10, so you have to create your own preset.
+**A:** Yes. Starting from version 2.5, Windows Server is supported. There are even few tweaks specific to Server environment. Keep in mind though, that the script is still primarily designed for Windows 10.
 
 **Q:** Can I run the script on Windows 7, 8, 8.1 or other versions of Windows?  
-**A:** No. Although some tweaks may work also on older versions of Windows, the script is developed only for Windows 10 and Windows Server 2016 / 2019. There are no plans to support older versions.
+**A:** No. Although some tweaks may work also on older versions of Windows, the script is developed only for Windows 10 and Windows Server 2016/2019. There are no plans to support older versions.
 
 **Q:** Can I run the script in multi-user environment?  
 **A:** Yes, to certain extent. Some tweaks (most notably UI tweaks) are set only for the user currently executing the script. As stated above, the script can be run repeatedly; therefore it's possible to run it multiple times, each time as different user. Due to the nature of authentication and privilege escalation mechanisms in Windows, most of the tweaks can be successfully applied only by users belonging to *Administrators* group. Standard users will get an UAC prompt asking for admin credentials which then causes the tweaks to be applied to the given admin account instead of the original non-privileged one. There are a few ways how this can be circumvented programmatically, but I'm not planning to include any as it would negatively impact code complexity and readability. If you still wish to try to use the script in multi-user environment, check [this answer in issue #29](https://github.com/Disassembler0/Win10-Initial-Setup-Script/issues/29#issuecomment-333040591) for some pointers.
 
 **Q:** Did you test the script?  
-**A:** Yes. I'm testing new additions on up-to-date 64bit Home and Enterprise editions in VMs. I'm also regularly using it for all my home installations after all bigger updates.
+**A:** Yes. I'm testing new additions on up-to-date 64-bit Home and Enterprise editions in VMs. I'm also regularly using it for all my home installations after all bigger updates.
 
 **Q:** I've run the script and it did something I don't like, how can I undo it?  
 **A:** For every tweak, there is also a corresponding function which restores the default settings. The default is considered freshly installed Windows 10 or Windows Server 2016 with no adjustments made during or after the installation. Use the tweaks to create and run new preset. Alternatively, since some functions are just automation for actions which can be done using GUI, find appropriate control and modify it manually.
@@ -66,12 +64,12 @@ The script supports command line options and parameters which can help you custo
 **Q:** For how long are you going to maintain the script?  
 **A:** As long as I use Windows 10.
 
-**Q:** I really like the script. Can I send a donation?  
-**A:** Feel free to send donations via [PayPal](https://www.paypal.me/Disassembler). Any amount is appreciated, but keep in mind that donations are completely voluntary and I'm not obliged to make any script adjustments in your favor regardless of the donated amount. You can also drop me a mail to discuss an alternative way.
+Q: I really like the script. Can I send a donation?
+A: Feel free to send donations via [PayPal](https://www.paypal.me/Disassembler). Any amount is appreciated, but keep in mind that donations are completely voluntary and I'm not obliged to make any script adjustments in your favor regardless of the donated amount. You can also drop me a mail to discuss an alternative way.
 
 &nbsp;
 
-## Windows builds overview
+## Windows builds overview (semi-annual release GA stable channel)
 
 | Version |        Code name        |     Marketing name     | Build |
 | :-----: | ----------------------- | ---------------------- | :---: |
