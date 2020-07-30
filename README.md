@@ -79,6 +79,7 @@ Run the script ``Win10.ps1`` with administrator privilidges (make sure your acco
 |  1903   | 19H1                    | May 2019 Update        | 18362 |
 |  1909   | 19H2                    | November 2019 Update   | 18363 |
 |  2004   | 20H1                    | May 2020 Update        | 19041 |
+|  200x   | 20H2                    | TBA                    | 20xxx |
 
 &nbsp;
 
