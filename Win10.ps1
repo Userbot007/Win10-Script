@@ -27,7 +27,6 @@ $tweaks = @(
 	### External Program Setup
 	"InstallPrattProgs", #REQUIRED FOR OTHER PROGRAM INSTALLS!
 	"Install7Zip",
-	"InstallNotepadplusplus",
 	"InstallVLC",
 
 	### Windows Apps
@@ -187,10 +186,6 @@ Function Install7Zip {
 	choco install 7zip -y
 }
 
-Function InstallNotepadplusplus {
-	Write-Output "Installing Notepad++"
-	choco install notepadplusplus -y
-}
 
 Function InstallVLC {
 	Write-Output "Installing VLC Media Player"
