@@ -7,10 +7,6 @@
 #
 #    Note from author: Never run scripts without reading them & understanding what they do.
 #
-#	Addition: One command to rule them all, one command to find it, and one command to Run it! 
-#
-#     > powershell -nop -c "iex(New-Object Net.WebClient).DownloadString('https://git.io/JJ8R4')"
-#
 #	Pratyaksh M additions:
 #
 #	- One command to launch and run
