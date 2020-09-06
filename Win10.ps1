@@ -35,7 +35,6 @@ $tweaks = @(
 	"DisableDiagTrack",             # "EnableDiagTrack",
 
 	### Security Tweaks ###
-	"SetUACLow",                  # "SetUACHigh",
 	# "EnableSharingMappedDrives",  # "DisableSharingMappedDrives",
 	# "DisableAdminShares",           # "EnableAdminShares",
 	"DisableSMB1",                # "EnableSMB1",
