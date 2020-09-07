@@ -112,7 +112,6 @@ $tweaks = @(
 
 	### Application Tweaks ###
 	"DisableOneDrive",              # "EnableOneDrive",
-	"UninstallOneDrive",            # "InstallOneDrive",
 	"UninstallMsftBloat",           # "InstallMsftBloat",
 	"UninstallThirdPartyBloat",     # "InstallThirdPartyBloat",
 	# "UninstallWindowsStore",      # "InstallWindowsStore",
@@ -1321,17 +1320,6 @@ Function DisableOneDrive {
 Function EnableOneDrive {
 	Write-Output "Enabling OneDrive..."
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" -Name "DisableFileSyncNGSC" -ErrorAction SilentlyContinue
-# Uninstall OneDrive
-Function UninstallOneDrive {
-	Write-Output "Uninstalling Microsoft OneDrive"
-	taskkill /f /im OneDrive.exe
-	%SystemRoot%\SysWOW64\OneDriveSetup.exe /uninstall
-}
-
-# Install OneDrive
-Function InstallOneDrive {
-	Write-Output "Installing Microsoft OneDrive"
-	%systemroot%\SysWOW64\OneDriveSetup.exe
 }
 
 # Uninstall default Microsoft applications
