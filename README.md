@@ -16,6 +16,30 @@ This is a PowerShell script for automation of routine tasks done after fresh ins
 
 ## Usage
 Run the script ``Win10.ps1`` with administrator privilidges (make sure your account has administrator privileges).
+1. Download the appropriate variant of the script (i.e. between Moderate and Ultimate). Extract the ZIP file and place the Win10.ps1 file to your OS drive (Local Disk C primarily)
+2. Open PowerShell, go two folders back by doing ```cd ../../```
+3. Type ```Set-ExecutionPolicy Unrestricted``` and press Enter, in the warning that follows, press ```a``` key.
+4. Finally, to run the script, do ```./Win10.ps1```. If it prompts with an alert, press ```r``` key.
+
+&nbsp;
+
+## Comparision
+
+| Parameter            |    Moderate             |     Ultimate             |
+| :-----:              | ----------------------- | ----------------------   |
+| Action center        | Keep                    | Disable                  |
+| Data collection      | No changes              | Disable (level-3)        |
+| Lockscreen           | Keep                    | Disable                  |
+| Microsoft Store      | Keep                    | Remove                   |
+| Microsoft OneDrive   | Freeze                  | Uninstall                |
+| Microsoft Defender   | No changes              | Disable                  |
+| Microsoft Photos     | Keep                    | Remove                   |
+| MSEdge PDF takeover  | Let Edge takeover       | Don't let Edge takeover  |
+| Notepad++            | Don't install           | Install                  |
+| Snip & Sketch        | Keep                    | Uninstall                |
+| Tray icons           | Show all on taskbar     | Show all on taskbar      |
+| User account control | No changes              | Lowered down             |
+| Windows Media Player | Don't install           | Install                  |
 
 &nbsp;
 
