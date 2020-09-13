@@ -32,7 +32,6 @@ $tweaks = @(
 	"DisableSmartScreen",         # "EnableSmartScreen",
 	"DisableMapUpdates",            # "EnableMapUpdates",
 	"SetP2PUpdateLocal",          # "SetP2PUpdateInternet",
-	"DisableDiagTrack",             # "EnableDiagTrack",
 
 	### Security Tweaks ###
 	# "EnableSharingMappedDrives",  # "DisableSharingMappedDrives",
@@ -204,21 +203,6 @@ Function SetP2PUpdateInternet {
 	Write-Output "Unrestricting Windows Update P2P to internet..."
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config" -Name "DODownloadMode" -ErrorAction SilentlyContinue
 }
-
-# Stop and disable Diagnostics Tracking Service
-Function DisableDiagTrack {
-	Write-Output "Stopping and disabling Diagnostics Tracking Service..."
-	Stop-Service "DiagTrack" -WarningAction SilentlyContinue
-	Set-Service "DiagTrack" -StartupType Disabled
-}
-
-# Enable and start Diagnostics Tracking Service
-Function EnableDiagTrack {
-	Write-Output "Enabling and starting Diagnostics Tracking Service..."
-	Set-Service "DiagTrack" -StartupType Automatic
-	Start-Service "DiagTrack" -WarningAction SilentlyContinue
-}
-
 
 ##########
 # Security Tweaks
