@@ -1,6 +1,9 @@
+# Documentation
+
 ## Contents
  - [Description](#description)
  - [Usage](#usage)
+ - [Comparision](#comparision)
  - [FAQ](#faq)
  - [Windows builds overview](#windows-builds-overview)
  - [Advanced usage](#advanced-usage)
@@ -15,11 +18,11 @@ This is a PowerShell script for automation of routine tasks done after fresh ins
 &nbsp;
 
 ## Usage
-Run the script ``Win10.ps1`` with administrator privilidges (make sure your account has administrator privileges).
 1. Download the appropriate variant of the script (i.e. between Moderate and Ultimate). Extract the ZIP file and place the Win10.ps1 file to your OS drive (Local Disk C primarily)
 2. Open PowerShell, go two folders back by doing ```cd ../../```
 3. Type ```Set-ExecutionPolicy Unrestricted``` and press Enter, in the warning that follows, press ```a``` key.
 4. Finally, to run the script, do ```./Win10.ps1```. If it prompts with an alert, press ```r``` key.
+
 
 &nbsp;
 
@@ -29,6 +32,7 @@ Run the script ``Win10.ps1`` with administrator privilidges (make sure your acco
 | :-----:              | ----------------------- | ----------------------   |
 | Action center        | Keep                    | Disable                  |
 | Data collection      | No changes              | Disable (level-3)        |
+| Library icons        | No changes              | Hide                     |
 | Lockscreen           | Keep                    | Disable                  |
 | Microsoft Store      | Keep                    | Remove                   |
 | Microsoft OneDrive   | Freeze                  | Uninstall                |
@@ -40,6 +44,8 @@ Run the script ``Win10.ps1`` with administrator privilidges (make sure your acco
 | Tray icons           | Show all on taskbar     | Show all on taskbar      |
 | User account control | No changes              | Lowered down             |
 | Windows Media Player | Don't install           | Install                  |
+
+P.S.: Here, the **Libary icons** indicate Documents, Pictures, Music & Videos from Sidebar in This PC // Explorer
 
 &nbsp;
 
@@ -60,11 +66,8 @@ Run the script ``Win10.ps1`` with administrator privilidges (make sure your acco
 **Q:** Can I run the script on Windows 7, 8, 8.1 or other versions of Windows?  
 **A:** No. Although some tweaks may work also on older versions of Windows, the script is developed only for Windows 10 and Windows Server 2016/2019. There are no plans to support older versions.
 
-**Q:** Can I run the script in multi-user environment?  
-**A:** Yes, to certain extent. Some tweaks (most notably UI tweaks) are set only for the user currently executing the script. As stated above, the script can be run repeatedly; therefore it's possible to run it multiple times, each time as different user. Due to the nature of authentication and privilege escalation mechanisms in Windows, most of the tweaks can be successfully applied only by users belonging to *Administrators* group. Standard users will get an UAC prompt asking for admin credentials which then causes the tweaks to be applied to the given admin account instead of the original non-privileged one. There are a few ways how this can be circumvented programmatically, but I'm not planning to include any as it would negatively impact code complexity and readability. If you still wish to try to use the script in multi-user environment, check [this answer in issue #29](https://github.com/Disassembler0/Win10-Initial-Setup-Script/issues/29#issuecomment-333040591) for some pointers.
-
 **Q:** Did you test the script?  
-**A:** Yes. I'm testing new additions on up-to-date 64-bit Home and Enterprise editions in VMs. I'm also regularly using it for all my home installations after all bigger updates.
+**A:** Yes. I'm testing new additions on up-to-date 64-bit Home and Enterprise editions in VMs.
 
 **Q:** I've run the script and it did something I don't like, how can I undo it?  
 **A:** For every tweak, there is also a corresponding function which restores the default settings. The default is considered freshly installed Windows 10 or Windows Server 2016 with no adjustments made during or after the installation. Use the tweaks to create and run new preset. Alternatively, since some functions are just automation for actions which can be done using GUI, find appropriate control and modify it manually.
@@ -76,7 +79,7 @@ Run the script ``Win10.ps1`` with administrator privilidges (make sure your acco
 **A:** I don't care. Also, that's not a question.
 
 **Q:** I'm using a tweak for &lt;feature&gt; on my installation, can you add it?  
-**A:** Submit a PR, create a feature request issue or drop me a message. If I find the functionality simple, useful and not dependent on any 3rd party modules or executables (including also *Chocolatey*, *NuGet*, *Ninite* or other automation solutions), I might add it.
+**A:** Submit a PR, create a feature request issue or drop me a message. 
 
 **Q:** Can I use the script or modify it for my / my company's needs?  
 **A:** Sure, knock yourself out. Just don't forget to include copyright notice as per MIT license requirements. I'd also suggest including a link to this GitHub repo as it's very likely that something will be changed, added or improved to keep track with future versions of Windows 10.
@@ -84,12 +87,9 @@ Run the script ``Win10.ps1`` with administrator privilidges (make sure your acco
 **Q:** Why are there repeated pieces of code throughout some functions?  
 **A:** So you can directly take a function block or a line from within a function and use it elsewhere, without elaborating on any dependencies.
 
-**Q:** For how long are you going to maintain the script?  
-**A:** As long as I use Windows 10.
-
 &nbsp;
 
-## Windows builds overview (GA & RTM builds in semi-annual channel)
+## Windows builds overview
 
 | Version |        Code name        |     Marketing name     | Build |
 | :-----: | ----------------------- | ---------------------- | :---: |
@@ -103,7 +103,7 @@ Run the script ``Win10.ps1`` with administrator privilidges (make sure your acco
 |  1903   | 19H1                    | May 2019 Update        | 18362 |
 |  1909   | 19H2                    | November 2019 Update   | 18363 |
 |  2004   | 20H1                    | May 2020 Update        | 19041 |
-|  200x   | 20H2                    | TBA                    | 20xxx |
+|  200x   | 20H2                    | TBA                    | 19042 |
 
 &nbsp;
 
@@ -197,8 +197,8 @@ If you wish to make more elaborate modifications of the basic script and incorpo
 2. Clone your fork on your computer.
 
     ```
-    git clone https://github.com/<yournamehere>/Win10-InitialSetupScript
-    cd Win10-InitialSetupScript
+    git clone https://github.com/<yournamehere>/Win10-Script
+    cd Win10-Script
     ```
 3. Commit your modifications as you see fit.
 4. Once there are new additions in the working directory, commit your changes and push them accordingly.
@@ -209,4 +209,3 @@ If you wish to make more elaborate modifications of the basic script and incorpo
     git push -f
     ```
 &nbsp;
-
