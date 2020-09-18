@@ -52,7 +52,6 @@ $tweaks = @(
 	"DisableMeltdownCompatFlag", # "EnableMeltdownCompatFlag"    
 
 	### Service Tweaks ###
-	"DisableHomeGroups",          # "EnableHomeGroups",
 	"DisableRemoteAssistance",      # "EnableRemoteAssistance",
 	"EnableRemoteDesktop",          # "DisableRemoteDesktop",
 	"DisableAutoplay",              # "EnableAutoplay",
@@ -440,23 +439,6 @@ Function DisableMeltdownCompatFlag {
 ##########
 # Service Tweaks
 ##########
-
-# Stop and disable Home Groups services - Not applicable to 1803 and newer or Server
-Function DisableHomeGroups {
-	Write-Output "Stopping and disabling Home Groups services..."
-	Stop-Service "HomeGroupListener" -WarningAction SilentlyContinue
-	Set-Service "HomeGroupListener" -StartupType Disabled
-	Stop-Service "HomeGroupProvider" -WarningAction SilentlyContinue
-	Set-Service "HomeGroupProvider" -StartupType Disabled
-}
-
-# Enable and start Home Groups services - Not applicable to 1803 and newer or Server
-Function EnableHomeGroups {
-	Write-Output "Starting and enabling Home Groups services..."
-	Set-Service "HomeGroupListener" -StartupType Manual
-	Set-Service "HomeGroupProvider" -StartupType Manual
-	Start-Service "HomeGroupProvider" -WarningAction SilentlyContinue
-}
 
 # Disable Remote Assistance - Not applicable to Server (unless Remote Assistance is explicitly installed)
 Function DisableRemoteAssistance {
