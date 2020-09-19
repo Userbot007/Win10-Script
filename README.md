@@ -30,22 +30,26 @@ This is a PowerShell script for automation of routine tasks done after fresh ins
 
 | Parameter            |    Moderate             |     Ultimate             |
 | :-----:              | ----------------------- | ----------------------   |
-| Action center        | Keep                    | Disable                  |
-| Data collection      | No changes              | Disable (level-3)        |
-| Library icons        | No changes              | Hide                     |
-| Lockscreen           | Keep                    | Disable                  |
-| Microsoft Store      | Keep                    | Remove                   |
-| Microsoft OneDrive   | Freeze                  | Uninstall                |
-| Microsoft Defender   | No changes              | Disable                  |
-| Microsoft Photos     | Keep                    | Remove                   |
-| MSEdge PDF takeover  | Let Edge takeover       | Don't let Edge takeover  |
-| Notepad++            | Don't install           | Install                  |
-| Snip & Sketch        | Keep                    | Uninstall                |
-| Tray icons           | Show all on taskbar     | Show all on taskbar      |
-| User account control | No changes              | Lowered down             |
-| Windows Media Player | Don't install           | Install                  |
+| Action center        |           -             |         Hide             |
+| Data collection      |           -             |       Disable            |
+| Library icons        |           -             |         Hide             |
+| Lockscreen           |           -             |       Disable            |
+| Microsoft Store      |           -             |      Uninstall           |
+| Microsoft OneDrive   |        Freeze           |      Uninstall           |
+| Microsoft Defender   |           -             |       Disable            |
+| Microsoft Photos     |           -             |      Uninstall           |
+| MSEdge PDF takeover  |           -             |        Remove            |
+| Notepad++            |           -             |       Install            |
+| Snip & Sketch        |           -             |      Uninstall           |
+| Tray icons           |       Unhidden          |      Unhidden            |
+| User account control |           -             |     Lowered down         |
+| Windows Media Player |           -             |       Install            |
 
-P.S.: Here, the **Libary icons** indicate Documents, Pictures, Music & Videos from Sidebar in This PC // Explorer
+Please note: 
+- Here, the **Libary icons** indicate Documents, Pictures, Music & Videos from Sidebar in This PC // Explorer
+- The **ultimate** script disables data collection on level-3. This means, you might experience some apps, for instance Microsoft apps, to break functionality and/or not run at all. If that happens, do not blame me for doing that. It is completely revertable AND you should've read documentation properly before executing the **ultimate** variant of the script.
+- The **moderate** variant of the script does not touch data collection and telemetry at all, and this makes it the variant that has no business to have with apps being non-functional due to data collection or telemetry hardening.
+
 
 &nbsp;
 
@@ -103,79 +107,7 @@ P.S.: Here, the **Libary icons** indicate Documents, Pictures, Music & Videos fr
 |  1903   | 19H1                    | May 2019 Update        | 18362 |
 |  1909   | 19H2                    | November 2019 Update   | 18363 |
 |  2004   | 20H1                    | May 2020 Update        | 19041 |
-|  200x   | 20H2                    | TBA                    | 19042 |
-
-&nbsp;
-
-## Advanced usage
-
-    powershell.exe -NoProfile -ExecutionPolicy Bypass -File Win10.ps1 [-include filename] [-preset filename] [-log logname] [[!]tweakname]
-
-    -include filename       load module with user-defined tweaks
-    -preset filename        load preset with tweak names to apply
-    -log logname            save script output to a file
-    tweakname               apply tweak with this particular name
-    !tweakname              remove tweak with this particular name from selection
-
-### Presets
-
-The tweak library consists of separate idempotent functions, containing one tweak each. The functions can be grouped to *presets*. Preset is simply a list of function names which should be called. Any function which is not present or is commented in a preset will not be called, thus the corresponding tweak will not be applied. In order for the script to do something, you need to supply at least one tweak library via `-include` and at least one tweak name, either via `-preset` or directly as command line argument.
-
-The tweak names can be prefixed with exclamation mark (`!`) which will instead cause the tweak to be removed from selection. This is useful in cases when you want to apply the whole preset, but omit a few specific tweaks in the current run. Alternatively, you can have a preset which "patches" another preset by adding and removing a small amount of tweaks.
-
-To supply a customized preset, you can either pass the function names directly as arguments.
-
-    powershell.exe -NoProfile -ExecutionPolicy Bypass -File Win10.ps1 -include Win10.psm1 EnableFirewall EnableDefender
-
-Or you can create a file where you write the function names (one function name per line, no commas or quotes, whitespaces allowed, comments starting with `#`) and then pass the filename using `-preset` parameter.  
-Example of a preset file `mypreset.txt`:
-
-    # Security tweaks
-    EnableFirewall
-    EnableDefender
-
-    # UI tweaks
-    ShowKnownExtensions
-    ShowHiddenFiles   # Only hidden, not system
-
-Command using the preset file above:
-
-    powershell.exe -NoProfile -ExecutionPolicy Bypass -File Win10.ps1 -include Win10.psm1 -preset mypreset.txt
-
-### Includes
-
-The script also supports inclusion of custom tweaks from user-supplied modules passed via `-include` parameter. The content of the user-supplied module is completely up to the user, however it is strongly recommended to have the tweaks separated in respective functions as the main tweak library has. The user-supplied scripts are loaded into the main script via `Import-Module`, so the library should ideally be a `.psm1` PowerShell module. 
-Example of a user-supplied tweak library `mytweaks.psm1`:
-
-```powershell
-Function MyTweak1 {
-    Write-Output "Running MyTweak1..."
-    # Do something
-}
-
-Function MyTweak2 {
-    Write-Output "Running MyTweak2..."
-    # Do something else
-}
-```
-
-Command using the script above:
-
-    powershell.exe -NoProfile -ExecutionPolicy Bypass -File Win10.ps1 -include mytweaks.psm1 MyTweak1 MyTweak2
-
-### Combination
-
-All features described above can be combined. You can have a preset which includes both tweaks from the original script and your personal ones. Both `-include` and `-preset` options can be used more than once, so you can split your tweaks into groups and then combine them based on your current needs. The `-include` modules are always imported before the first tweak is applied, so the order of the command line parameters doesn't matter and neither does the order of the tweaks (except for `RequireAdmin`, which should always be called first and `Restart`, which should be always called last). It can happen that some tweaks are applied more than once during a singe run because you have them in multiple presets. That shouldn't cause any problems as the tweaks are idempotent.  
-Example of a preset file `otherpreset.txt`:
-
-    MyTweak1
-    MyTweak2
-    !ShowHiddenFiles   # Will remove the tweak from selection
-    WaitForKey
-
-Command using all three examples combined:
-
-    powershell.exe -NoProfile -ExecutionPolicy Bypass -File Win10.ps1 -include Win10.psm1 -include mytweaks.psm1 -preset mypreset.txt -preset otherpreset.txt Restart
+|  200x   | 20H2                    | October 2020 Update    | 19042 |
 
 &nbsp;
 
