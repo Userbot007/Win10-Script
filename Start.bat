@@ -1,5 +1,5 @@
 @echo off
-
+color a
 CLS
 ECHO.
 ECHO =============================
