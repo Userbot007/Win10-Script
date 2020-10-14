@@ -1,5 +1,6 @@
 ##############
 #
+#color b
 # Windows 10 - Setup Script
 # Author: PratyakshM <pratyakshm@protonmail.com>
 # Notes: Please run the script ONLY after giving the documentation (here, README.md) a thorough read.
